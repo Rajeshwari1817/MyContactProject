@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundPic"
+    tools:context=".addContact">
+    <EditText
+        android:id="@+id/first_name"
+        android:layout_width="284dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="FirstName"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.442"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32" />
+
+    <EditText
+        android:id="@+id/LastName"
+        android:layout_width="284dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="LastName"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.442"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/first_name" />
+
+    <EditText
+        android:id="@+id/Email"
+        android:layout_width="281dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Email_ID"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.442"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LastName" />
+
+    <EditText
+        android:id="@+id/PhnNo"
+        android:layout_width="276dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="PhoneNumber"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.442"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Email" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="146dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="52dp"
+        android:text="SAVE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PhnNo" />
+
+
+    <Button
+        android:id="@+id/goBack"
+        android:layout_width="151dp"
+        android:layout_height="57dp"
+        android:text="GO TO DASHBOARD"
+
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.451"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/save"
+        app:layout_constraintVertical_bias="0.251" />
+</androidx.constraintlayout.widget.ConstraintLayout>
