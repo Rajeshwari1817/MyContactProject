@@ -11,16 +11,55 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    Button signin;
-    EditText user, pass;
-    TextView register;
-    DbHandler db;
+
+
+    Button signIn;
+    EditText email, pwd;
+   // TextView register;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        user = findViewById(R.id.Email);
+        email = findViewById(R.id.Email);
+        pwd = findViewById(R.id.password);
+        signIn = findViewById(R.id.signinbtn);
+
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 final String emailIdText = email.getText().toString();
+                 final String passwordText = pwd.getText().toString();
+                 if (emailIdText.isEmpty() || passwordText.isEmpty()) {
+                     Toast.makeText(getApplicationContext(), " Fill all Fields", Toast.LENGTH_SHORT).show();
+                 }else{
+                     //Perform Query
+                     UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
+                     final UserDao userDao = userDatabase.userDao();
+                     new Thread(new Runnable() {
+                         @Override
+                         public void run() {
+                             UserEntity userEntity = userDao.login(emailIdText,passwordText);
+                             if (userEntity == null) {
+                                 runOnUiThread(new Runnable() {
+                                     @Override
+                                     public void run() {
+                                         Toast.makeText(getApplicationContext(), "InValid User", Toast.LENGTH_SHORT).show();
+                                     }
+                                 });
+                             }else {
+                                 String name = userEntity.name;
+                                 startActivity(new Intent(MainActivity.this,dashboard.class).putExtra("name",name));
+                             }
+                         }
+                     }).start();
+                 }
+
+            }
+        });
+
+        /*user = findViewById(R.id.Email);
         pass = findViewById(R.id.password);
 
         signin = findViewById(R.id.signinbtn);
@@ -50,6 +89,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(register);
                // Toast.makeText(MainActivity.this, "Register clicked", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 }

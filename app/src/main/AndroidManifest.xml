@@ -14,8 +14,8 @@
             android:name=".dashboard"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".register" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".register">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
