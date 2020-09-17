@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button signIn;
     EditText email, pwd;
-   // TextView register;
+    // TextView register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,33 +29,29 @@ public class MainActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 final String emailIdText = email.getText().toString();
-                 final String passwordText = pwd.getText().toString();
-                 if (emailIdText.isEmpty() || passwordText.isEmpty()) {
-                     Toast.makeText(getApplicationContext(), " Fill all Fields", Toast.LENGTH_SHORT).show();
-                 }else{
-                     //Perform Query
-                     UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
-                     final UserDao userDao = userDatabase.userDao();
-                     new Thread(new Runnable() {
-                         @Override
-                         public void run() {
-                             UserEntity userEntity = userDao.login(emailIdText,passwordText);
-                             if (userEntity == null) {
-                                 runOnUiThread(new Runnable() {
-                                     @Override
-                                     public void run() {
-                                         Toast.makeText(getApplicationContext(), "InValid User", Toast.LENGTH_SHORT).show();
-                                     }
-                                 });
-                             }else {
-                                 String name = userEntity.name;
-                                 startActivity(new Intent(MainActivity.this,dashboard.class).putExtra("name",name));
-                             }
-                         }
-                     }).start();
-                 }
+                final String emailIdText = email.getText().toString();
+                final String passwordText = pwd.getText().toString();
 
+                if (emailIdText.isEmpty() || passwordText.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), " Fill all Fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    //Perform Query
+                    UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
+                    final UserDao userDao = userDatabase.userDao();
+                    UserEntity userEntity = userDao.login(emailIdText, passwordText);
+
+                    if (userEntity == null) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), "InValid User", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        String name = userEntity.name;
+                        startActivity(new Intent(MainActivity.this, dashboard.class).putExtra("name", name));
+                    }
+                }
             }
         });
 
