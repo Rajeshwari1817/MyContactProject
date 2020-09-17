@@ -4,34 +4,38 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class addContact extends AppCompatActivity {
-    EditText name,last,email,ph;
+    private static final String TAG = "dashboard";
+
+    EditText first_name,last_name,email,phn;
     Button save,back;
     String newString;
-    DbHandlerI db;
+    //DbHandlerI db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
 
-        db = new DbHandlerI(addContact.this);
+        //db = new DbHandlerI(addContact.this);
 
-        name = findViewById(R.id.fullName);
-        last = findViewById(R.id.LastName);
+        first_name = findViewById(R.id.fullName);
+        last_name = findViewById(R.id.LastName);
         email = findViewById(R.id.Email);
-        ph = findViewById(R.id.PhnNo);
+        phn = findViewById(R.id.PhnNo);
 
         save = findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                    db.addUser(newString,name.getText().toString(),last.getText().toString(),email.getText().toString(),ph.getText().toString());
+                //Save to Database
+                Log.d(TAG ,"onClick: f_name:"+first_name.getText().toString());
+                    //db.addUser(newString,name.getText().toString(),last.getText().toString(),email.getText().toString(),ph.getText().toString());
                 Toast.makeText(addContact.this, "Contact Added..", Toast.LENGTH_SHORT).show();
             }
         });
@@ -45,7 +49,7 @@ public class addContact extends AppCompatActivity {
                 startActivity(dashboard);
             }
         });
-        if (savedInstanceState == null) {
+        /*if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
                 newString= null;
@@ -54,7 +58,7 @@ public class addContact extends AppCompatActivity {
             }
         } else {
             newString= (String) savedInstanceState.getSerializable("STRING_I_NEED");
-        }
+        }*/
 
     }
 }
