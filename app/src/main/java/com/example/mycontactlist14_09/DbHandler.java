@@ -7,8 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DbHandler extends SQLiteOpenHelper {
-    //all constants as they are static and final(Db=Database)
+public class DbHandler  {
+    /*//all constants as they are static and final(Db=Database)
     //Db Version
     private static final int Db_Version=1;
     //Db Name
@@ -72,5 +72,5 @@ public class DbHandler extends SQLiteOpenHelper {
             return true;
     }
 
-
+*/
 }

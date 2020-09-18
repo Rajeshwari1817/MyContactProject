@@ -1,8 +1,12 @@
 package com.example.mycontactlist14_09;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Dao
@@ -13,4 +17,11 @@ public interface UserDao {
 
      @Query("SELECT * from users where emailId=(:email) and password=(:password)")
      UserEntity login(String email,String password);
+
+
+     @Query("SELECT * from user")
+     List<User> getAllUsers();
+
+     @Insert
+    void insertAll(User...user);
 }

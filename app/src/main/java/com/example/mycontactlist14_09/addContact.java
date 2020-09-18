@@ -1,6 +1,7 @@
 package com.example.mycontactlist14_09;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,13 +30,19 @@ public class addContact extends AppCompatActivity {
         email = findViewById(R.id.Email);
         phn = findViewById(R.id.PhnNo);
 
+        final UserDatabase userDatabase = Room.databaseBuilder(getApplicationContext(),UserDatabase.class,"CONTACT")
+                .allowMainThreadQueries()
+                .build();
+
         save = findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Save to Database
                 Log.d(TAG ,"onClick: f_name:"+first_name.getText().toString());
-                    //db.addUser(newString,name.getText().toString(),last.getText().toString(),email.getText().toString(),ph.getText().toString());
+                userDatabase.userDao().insertAll(new User("Rajeshwari","Brahmbhatt",
+                        "raj10110.hj@gmail.com","4382701035"));
+                startActivity(new Intent(addContact.this,dashboard.class));
                 Toast.makeText(addContact.this, "Contact Added..", Toast.LENGTH_SHORT).show();
             }
         });

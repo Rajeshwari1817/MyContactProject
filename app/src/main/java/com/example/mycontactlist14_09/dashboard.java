@@ -4,18 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class dashboard extends AppCompatActivity {
 
@@ -24,7 +26,7 @@ public class dashboard extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     FloatingActionButton fab;
-    ArrayList<String> users;
+    List<User> users;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,13 +36,17 @@ public class dashboard extends AppCompatActivity {
 
         recyclerView =findViewById(R.id.recycler_view);
 
-        users = new ArrayList<>();
+       // users = new ArrayList<>();
 
-        for(int i=0;i<1000;i++) {
-            users.add("rj # " +i);
-        }
+     /*   for(int i=0;i<100;i++) {
+            User user = new User("RAJESHWARI ","BRAHMBHATT","raj10110.hj@gmail.com","4382701035");
+            users.add(user);
+        }*/
+      UserDatabase userDatabase = Room.databaseBuilder(getApplicationContext(),UserDatabase.class,"CONTACT")
+              .allowMainThreadQueries()
+              .build();
 
-
+        List<User> users = userDatabase.userDao().getAllUsers();
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
