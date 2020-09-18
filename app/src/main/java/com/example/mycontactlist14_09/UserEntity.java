@@ -99,6 +99,9 @@ public class UserEntity {
         this.emailId = emailId;
     }
 
+    public UserEntity() {
+    }
+
     public String getPassword() {
         return password;
     }
