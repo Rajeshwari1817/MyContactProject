@@ -14,9 +14,9 @@ import java.util.List;
 
 class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
-    List<User> users;
+    List<UserEntity> users;
 
-    public UserAdapter(List<User> users) {
+    public UserAdapter(List<UserEntity> users) {
         this.users = users;
     }
 

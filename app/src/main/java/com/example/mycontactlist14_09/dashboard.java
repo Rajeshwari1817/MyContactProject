@@ -26,7 +26,7 @@ public class dashboard extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     FloatingActionButton fab;
-    List<User> users;
+    List<UserEntity> users;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +46,7 @@ public class dashboard extends AppCompatActivity {
               .allowMainThreadQueries()
               .build();
 
-        List<User> users = userDatabase.userDao().getAllUsers();
+        List<UserEntity> users = userDatabase.userDao().getAllUsers();
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

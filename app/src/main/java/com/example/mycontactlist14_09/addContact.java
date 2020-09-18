@@ -40,7 +40,7 @@ public class addContact extends AppCompatActivity {
             public void onClick(View v) {
                 //Save to Database
                 Log.d(TAG ,"onClick: f_name:"+first_name.getText().toString());
-                userDatabase.userDao().insertAll(new User("Rajeshwari","Brahmbhatt",
+                userDatabase.userDao().insertAll(new UserEntity("Rajeshwari","Brahmbhatt",
                         "raj10110.hj@gmail.com","4382701035"));
                 startActivity(new Intent(addContact.this,dashboard.class));
                 Toast.makeText(addContact.this, "Contact Added..", Toast.LENGTH_SHORT).show();

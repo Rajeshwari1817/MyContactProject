@@ -19,9 +19,9 @@ public interface UserDao {
      UserEntity login(String email,String password);
 
 
-     @Query("SELECT * from user")
-     List<User> getAllUsers();
+     @Query("SELECT * from users")
+     List<UserEntity> getAllUsers();
 
      @Insert
-    void insertAll(User...user);
+    void insertAll(UserEntity...user);
 }
