@@ -2,9 +2,11 @@ package com.example.mycontactlist14_09;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,10 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     List<UserEntity> users;
     Context context;
     UserEntity userEntity=new UserEntity();
+
+
+
+
     public UserAdapter(List<UserEntity> users, Context context) {
         this.users = users;
         this.context=context;
@@ -30,6 +36,8 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_row,parent,false);
         return new ViewHolder(view);
     }
+
+
 
     @Override
     public void onBindViewHolder(@NonNull UserAdapter.ViewHolder holder, final int position) {

@@ -36,12 +36,7 @@ public class dashboard extends AppCompatActivity {
 
         recyclerView =findViewById(R.id.recycler_view);
 
-       // users = new ArrayList<>();
 
-     /*   for(int i=0;i<100;i++) {
-            User user = new User("RAJESHWARI ","BRAHMBHATT","raj10110.hj@gmail.com","4382701035");
-            users.add(user);
-        }*/
       UserDatabase userDatabase = Room.databaseBuilder(getApplicationContext(),UserDatabase.class,"CONTACT")
               .allowMainThreadQueries()
               .build();
@@ -62,28 +57,6 @@ public class dashboard extends AppCompatActivity {
             }
         });
 
-       /* if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                newString= null;
-            } else {
-                newString= extras.getString("STRING_I_NEED");
-            }
-        } else {
-            newString= (String) savedInstanceState.getSerializable("STRING_I_NEED");
-        }
-        Toast.makeText(this, ""+newString, Toast.LENGTH_SHORT).show();
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                Intent i =new Intent(dashboard.this,addContact.class);
-                i.putExtra("STRING_I_NEED", newString);
-                startActivity(i);
-                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-               //         .setAction("Action", null).show();
-            }
-        });*/
     }
 }

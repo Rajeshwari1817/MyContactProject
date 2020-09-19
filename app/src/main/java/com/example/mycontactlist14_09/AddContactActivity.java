@@ -16,13 +16,13 @@ public class AddContactActivity extends AppCompatActivity {
     EditText first_name,last_name,email,phn;
     Button save,back;
     String newString;
-    //DbHandlerI db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
 
-        //db = new DbHandlerI(addContact.this);
+
 
         first_name = findViewById(R.id.first_name);
         last_name = findViewById(R.id.LastName);
@@ -40,9 +40,7 @@ public class AddContactActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Save to Database
-                //Log.d(TAG ,"onClick: f_name:"+first_name.getText().toString());
-                //userDatabase.userDao().insertAll(new UserEntity("Rajeshwari","Brahmbhatt","raj10110.hj@gmailcom","4382701035"));
+
                 UserEntity users =new UserEntity (first_name.getText().toString(),last_name.getText().toString(),email.getText().toString(),phn.getText().toString());
                 userDatabase.userDao().insertAll(users);
                 startActivity(new Intent(AddContactActivity.this,dashboard.class));
@@ -59,16 +57,6 @@ public class AddContactActivity extends AppCompatActivity {
                 startActivity(dashboard);
             }
         });
-        /*if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                newString= null;
-            } else {
-                newString= extras.getString("STRING_I_NEED");
-            }
-        } else {
-            newString= (String) savedInstanceState.getSerializable("STRING_I_NEED");
-        }*/
 
     }
 }

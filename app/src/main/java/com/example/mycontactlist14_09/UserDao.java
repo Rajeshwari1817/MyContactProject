@@ -1,11 +1,9 @@
 package com.example.mycontactlist14_09;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,4 +22,6 @@ public interface UserDao {
 
      @Insert
     void insertAll(UserEntity...user);
+
+
 }
