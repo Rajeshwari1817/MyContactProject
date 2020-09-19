@@ -14,9 +14,7 @@ import androidx.room.Room;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class dashboard extends AppCompatActivity {
@@ -34,6 +32,8 @@ public class dashboard extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
         recyclerView =findViewById(R.id.recycler_view);
 
        // users = new ArrayList<>();
@@ -50,7 +50,7 @@ public class dashboard extends AppCompatActivity {
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new UserAdapter(users);
+        adapter = new UserAdapter(users,this);
         recyclerView.setAdapter(adapter);
 
         fab = findViewById(R.id.fab);
@@ -58,7 +58,7 @@ public class dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"onClick: pressed!");
-                startActivity(new Intent(dashboard.this,addContact.class));
+                startActivity(new Intent(dashboard.this, AddContactActivity.class));
             }
         });
 
