@@ -1,6 +1,8 @@
 package com.example.mycontactlist14_09;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -18,10 +20,14 @@ public interface UserDao {
 
 
      @Query("SELECT * from users")
-     List<UserEntity> getAllUsers();
+    List<UserEntity> getAllUsers();
 
      @Insert
     void insertAll(UserEntity...user);
 
+     @Delete
+    void delete(UserEntity user);
 
+    @Query("SELECT * FROM users WHERE id = :id")
+    public UserEntity getUserById(int id);
 }

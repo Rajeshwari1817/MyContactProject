@@ -117,4 +117,6 @@ public class UserEntity {
     public void setConfirmPassword(String confirmPassword) {
         ConfirmPassword = confirmPassword;
     }
+
+
 }

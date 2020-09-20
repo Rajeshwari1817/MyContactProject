@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -21,7 +22,7 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     List<UserEntity> users;
     Context context;
     UserEntity userEntity=new UserEntity();
-
+    public Button ButtonDelete;
 
 
 
@@ -32,12 +33,11 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public UserAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public UserAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_row,parent,false);
+        //holder.ButtonDelete.setOnClickListener(getDeleteOnClickListener(userEntity));
         return new ViewHolder(view);
     }
-
-
 
     @Override
     public void onBindViewHolder(@NonNull UserAdapter.ViewHolder holder, final int position) {
@@ -46,10 +46,13 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.u_email.setText(users.get(position).getEmail());
         holder.u_phn.setText(users.get(position).getPhn());
 
+        UserEntity user = users.get(position);
+
         holder.uRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,ContactListActivity.class);
+                intent.putExtra("Id",users.get(position).getId());
                 intent.putExtra("first_name",users.get(position).getFirst_name());
                 intent.putExtra("L_name",users.get(position).getLast_name());
                 intent.putExtra("E_ID",users.get(position).getEmail());
@@ -59,6 +62,12 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
             }
         });
+    }
+    private View.OnClickListener getDeleteOnClickListener(final UserEntity userEntity) {
+        return view -> {
+            UserDatabase database = UserDatabase.getUserDatabase(view.getContext());
+            database.userDao().delete(userEntity);
+        };
     }
 
 
@@ -79,6 +88,8 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             u_name = itemView.findViewById(R.id.ul_name);
             u_email= itemView.findViewById(R.id.uEmail);
             u_phn = itemView.findViewById(R.id.uPhn);
+
+            ButtonDelete = itemView.findViewById(R.id.btnDelete);
         }
     }
 }

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 public class ContactListActivity extends AppCompatActivity {
 TextView contactName,contactL_name,contactEmail,contactPhn;
+Button btnDelete;
 
      @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +22,10 @@ TextView contactName,contactL_name,contactEmail,contactPhn;
          contactL_name = findViewById(R.id.contact_last_name);
          contactEmail = findViewById(R.id.contact_email_id);
          contactPhn = findViewById(R.id.contact_phn_no);
+         btnDelete = findViewById(R.id.btnDelete);
 
          Intent intent = getIntent();
+         int id = Integer.parseInt(intent.getStringExtra("ID"));
          String name = intent.getStringExtra("first_name");
          String L_name = intent.getStringExtra("L_name");
          String Eid = intent.getStringExtra("E_ID");
@@ -33,7 +36,14 @@ TextView contactName,contactL_name,contactEmail,contactPhn;
          contactEmail.setText(Eid);
          contactPhn.setText(Pno);
 
-
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                  UserDatabase database = UserDatabase.getUserDatabase(v.getContext());
+                  UserEntity userById = database.userDao().getUserById(id);
+                  database.userDao().delete(userById);
+             }
+        });
 
      }
 }
