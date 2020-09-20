@@ -23,7 +23,7 @@ public class dashboard extends AppCompatActivity {
     private static final String TAG = "dashboard";
 
     RecyclerView recyclerView;
-    RecyclerView.Adapter adapter;
+    UserAdapter adapter;
     FloatingActionButton fab;
     List<UserEntity> users;
     @Override
@@ -33,20 +33,16 @@ public class dashboard extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
         recyclerView =findViewById(R.id.recycler_view);
 
+        UserDatabase userDatabase = UserRepository.getDatabase();
 
-      UserDatabase userDatabase = Room.databaseBuilder(getApplicationContext(),UserDatabase.class,"CONTACT")
-              .allowMainThreadQueries()
-              .build();
+        adapter = new UserAdapter();
+        LiveData<List<UserEntity>> allUsers = userDatabase.userDao().getAllUsers();
 
-        List<UserEntity> users = userDatabase.userDao().getAllUsers();
-
+        allUsers.observe(this, adapter::submitList);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new UserAdapter(users,this);
         recyclerView.setAdapter(adapter);
 
         fab = findViewById(R.id.fab);

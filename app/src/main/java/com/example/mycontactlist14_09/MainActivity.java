@@ -11,11 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
-
     Button signIn;
     EditText email, pwd;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), " Fill all Fields", Toast.LENGTH_SHORT).show();
                 } else {
                     //Perform Query
-                    UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
+                    UserDatabase userDatabase = UserRepository.getDatabase();
                     final UserDao userDao = userDatabase.userDao();
                     UserEntity userEntity = userDao.login(emailIdText, passwordText);
 

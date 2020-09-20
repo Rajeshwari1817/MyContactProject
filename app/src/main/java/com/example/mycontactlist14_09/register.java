@@ -23,6 +23,8 @@ public class register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        UserRepository.makeDatabase(this);
+
         name = findViewById(R.id.nam);
         email = findViewById(R.id.Email);
         pwd = findViewById(R.id.password);
@@ -41,7 +43,7 @@ public class register extends AppCompatActivity {
                 userEntity.setConfirmPassword(confirm_pwd.getText().toString());
                 if (validateInput(userEntity)) {
                     //Do insert operation
-                    UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
+                    UserDatabase userDatabase = UserRepository.getDatabase();
                     final UserDao userDao = userDatabase.userDao();
                     new Thread(new Runnable() {
                         @Override

@@ -22,26 +22,19 @@ public class AddContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
 
-
-
         first_name = findViewById(R.id.first_name);
         last_name = findViewById(R.id.LastName);
         email = findViewById(R.id.Email);
         phn = findViewById(R.id.PhnNo);
         back=findViewById(R.id.goBack);
 
-
-        final UserDatabase userDatabase = Room.databaseBuilder(getApplicationContext(),UserDatabase.class,"CONTACT")
-                .allowMainThreadQueries()
-                .build();
-
+        UserDatabase userDatabase = UserRepository.getDatabase();
 
         save = findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                UserEntity users =new UserEntity (first_name.getText().toString(),last_name.getText().toString(),email.getText().toString(),phn.getText().toString());
+                UserEntity users = new UserEntity(first_name.getText().toString(),last_name.getText().toString(),email.getText().toString(),phn.getText().toString());
                 userDatabase.userDao().insertAll(users);
                 startActivity(new Intent(AddContactActivity.this,dashboard.class));
                 Toast.makeText(AddContactActivity.this, "Contact Added..", Toast.LENGTH_SHORT).show();

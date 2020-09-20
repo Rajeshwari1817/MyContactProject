@@ -1,9 +1,13 @@
 package com.example.mycontactlist14_09;
 
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import java.util.Objects;
 
 @Entity(tableName = "users")
 public class UserEntity {
@@ -36,7 +40,6 @@ public class UserEntity {
     private String phn;
 
     public UserEntity(String first_name, String last_name, String email, String  phn) {
-
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
@@ -118,5 +121,36 @@ public class UserEntity {
         ConfirmPassword = confirmPassword;
     }
 
+    public static DiffUtil.ItemCallback<UserEntity> DIFF_CALLBACK = new DiffUtil.ItemCallback<UserEntity>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull UserEntity oldItem, @NonNull UserEntity newItem) {
+            return oldItem.id == newItem.id;
+        }
 
+        @Override
+        public boolean areContentsTheSame(@NonNull UserEntity oldItem, @NonNull UserEntity newItem) {
+            return oldItem.equals(newItem);
+        }
+    };
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserEntity)) return false;
+        UserEntity that = (UserEntity) o;
+        return Objects.equals(getId(), that.getId()) &&
+                Objects.equals(getName(), that.getName()) &&
+                Objects.equals(getEmailId(), that.getEmailId()) &&
+                Objects.equals(getPassword(), that.getPassword()) &&
+                Objects.equals(getConfirmPassword(), that.getConfirmPassword()) &&
+                Objects.equals(getFirst_name(), that.getFirst_name()) &&
+                Objects.equals(getLast_name(), that.getLast_name()) &&
+                Objects.equals(getEmail(), that.getEmail()) &&
+                Objects.equals(getPhn(), that.getPhn());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getEmailId(), getPassword(), getConfirmPassword(), getFirst_name(), getLast_name(), getEmail(), getPhn());
+    }
 }

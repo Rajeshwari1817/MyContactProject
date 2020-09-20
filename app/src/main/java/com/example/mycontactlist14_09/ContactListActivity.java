@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class ContactListActivity extends AppCompatActivity {
 TextView contactName,contactL_name,contactEmail,contactPhn;
 Button btnDelete;
@@ -25,7 +27,7 @@ Button btnDelete;
          btnDelete = findViewById(R.id.btnDelete);
 
          Intent intent = getIntent();
-         int id = Integer.parseInt(intent.getStringExtra("ID"));
+         int id = intent.getIntExtra("Id",  -1);
          String name = intent.getStringExtra("first_name");
          String L_name = intent.getStringExtra("L_name");
          String Eid = intent.getStringExtra("E_ID");
@@ -39,9 +41,10 @@ Button btnDelete;
         btnDelete.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                  UserDatabase database = UserDatabase.getUserDatabase(v.getContext());
-                  UserEntity userById = database.userDao().getUserById(id);
-                  database.userDao().delete(userById);
+                  UserDatabase userDatabase = UserRepository.getDatabase();
+                  UserEntity userById = userDatabase.userDao().getUserById(id);
+                  userDatabase.userDao().delete(userById);
+                  finish();
              }
         });
 

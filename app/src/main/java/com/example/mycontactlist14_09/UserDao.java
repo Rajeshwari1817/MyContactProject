@@ -20,7 +20,7 @@ public interface UserDao {
 
 
      @Query("SELECT * from users")
-    List<UserEntity> getAllUsers();
+    LiveData<List<UserEntity>> getAllUsers();
 
      @Insert
     void insertAll(UserEntity...user);

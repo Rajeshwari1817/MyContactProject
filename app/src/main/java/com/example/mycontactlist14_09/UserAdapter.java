@@ -11,24 +11,18 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
-
-    List<UserEntity> users;
-    Context context;
-    UserEntity userEntity=new UserEntity();
+class UserAdapter extends ListAdapter<UserEntity, UserAdapter.ViewHolder> {
     public Button ButtonDelete;
 
-
-
-    public UserAdapter(List<UserEntity> users, Context context) {
-        this.users = users;
-        this.context=context;
+    public UserAdapter() {
+        super(UserEntity.DIFF_CALLBACK);
     }
 
     @NonNull
@@ -41,39 +35,32 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull UserAdapter.ViewHolder holder, final int position) {
-        holder.uRow.setText(users.get(position).getFirst_name());
-        holder.u_name.setText(users.get(position).getLast_name());
-        holder.u_email.setText(users.get(position).getEmail());
-        holder.u_phn.setText(users.get(position).getPhn());
+        UserEntity user = getItem(position);
 
-        UserEntity user = users.get(position);
+        holder.uRow.setText(user.getFirst_name());
+        holder.u_name.setText(user.getLast_name());
+        holder.u_email.setText(user.getEmail());
+        holder.u_phn.setText(user.getPhn());
 
         holder.uRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,ContactListActivity.class);
-                intent.putExtra("Id",users.get(position).getId());
-                intent.putExtra("first_name",users.get(position).getFirst_name());
-                intent.putExtra("L_name",users.get(position).getLast_name());
-                intent.putExtra("E_ID",users.get(position).getEmail());
-                intent.putExtra("P_no",users.get(position).getPhn());
+                Intent intent = new Intent(v.getContext() ,ContactListActivity.class);
+                intent.putExtra("Id",user.getId());
+                intent.putExtra("first_name",user.getFirst_name());
+                intent.putExtra("L_name",user.getLast_name());
+                intent.putExtra("E_ID",user.getEmail());
+                intent.putExtra("P_no",user.getPhn());
 
-                context.startActivity(intent);
-
+                v.getContext().startActivity(intent);
             }
         });
     }
     private View.OnClickListener getDeleteOnClickListener(final UserEntity userEntity) {
         return view -> {
-            UserDatabase database = UserDatabase.getUserDatabase(view.getContext());
-            database.userDao().delete(userEntity);
+            UserDatabase userDatabase = UserRepository.getDatabase();
+            userDatabase.userDao().delete(userEntity);
         };
-    }
-
-
-    @Override
-    public int getItemCount() {
-        return users.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
